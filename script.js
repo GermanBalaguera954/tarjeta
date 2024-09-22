@@ -10,4 +10,3 @@ openCardBtn.addEventListener('click', () => {
         }, 10000);
     }
 });
-
