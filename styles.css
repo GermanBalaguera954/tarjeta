@@ -24,21 +24,25 @@ body {
 }
 
 .container {
-    display: auto;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .card {
     perspective: 1000px;
-    margin-bottom: 150px;
-    width: 600px;
-    height: 250px;
+    margin-bottom: 10px;
+    width: 150vw; /* Cambiado a vw para hacerlo flexible */
+    max-width: 800px; /* Tamaño máximo en pantallas grandes */
+    height: 50vh; /* Altura ajustable en relación al viewport */
+    max-height: 400px; /* Altura máxima */
     transform: scale(1);
 }
 
 .card__inner {
-    width: 150%;
-    height: 150%;
+    width: 100%;
+    height: 100%;
     position: relative;
     transform-style: preserve-3d;
     transform: rotateY(0deg);
@@ -54,9 +58,10 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    padding: 50px;
+    padding: 50px; /* Reducido para pantallas pequeñas */
     box-sizing: border-box;
     color: white;
+    opacity: 70%;
 }
 
 .card__front {
@@ -64,25 +69,39 @@ body {
 }
 
 .card__back {
-    background: linear-gradient(135deg, #3e5151, #decba4);
+    background: linear-gradient(200deg, #404444, #a19d94);
     transform: rotateY(180deg);
     color: #333;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 20px; /* Reducido para pantallas pequeñas */
     text-align: center;
+
+    /* Agregar flexbox para centrar el contenido */
+    display: flex;
+    flex-direction: column; /* Coloca los elementos uno encima del otro */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    padding: 20px; /* Añade algo de espacio interior */
 }
 
-h3 {
-    font-size: 24px;
-    margin-bottom: 15px; 
-    color: pink;
-    padding: 20px;
+.card.is-flipped .card__inner {
+    transform: rotateY(180deg); /* La tarjeta gira */
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 p {
-    font-size: 16px; /* Tamaño adecuado para el párrafo */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: left;
     line-height: 1.5;
-    color: #000;
+    color: #ffffff;
     margin: 0;
 }
 
@@ -90,23 +109,57 @@ button {
     background-color: #e629e6;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 10px; /* Añade espacio antes del botón */
-    padding: 10px 10px; /* Tamaño más consistente del botón */
+    margin-top: 10px;
+    padding: 10px 20px;
     position: absolute;
-    bottom: 20px; /* Ubica el botón en la parte inferior */
-    left: 65%; /* Centra horizontalmente */
-    transform: translateX(-50%); /* Ajusta la posición para centrarlo correctamente */
+    bottom: 10px; /* Ajustado para pantallas pequeñas */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 button:hover {
     background-color: #982a6a;
 }
 
-.card.is-flipped .card__inner {
-    transform: rotateY(180deg);
+/* Medias queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .card {
+        width: 95vw; /* Tarjeta más pequeña en pantallas pequeñas */
+        height: 45vh;
+    }
+
+    h3 {
+        font-size: 14px; /* Ajusta los títulos */
+    }
+
+    p {
+        font-size: 14px; /* Texto más pequeño */
+    }
+
+    button {
+        bottom: 20px;
+    }
 }
 
+@media (max-width: 480px) {
+    .card {
+        width: 90vw;
+        height: 40vh;
+    }
+
+    h3 {
+        font-size: 10px; /* Ajusta aún más los títulos en móviles */
+    }
+
+    p {
+        font-size: 9px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
